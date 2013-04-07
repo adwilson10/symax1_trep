@@ -1,5 +1,9 @@
 <launch>
         <param name="robot_description" command="cat $(find symax1_trep)/quadmodel.xml" />
+	<param name="light_quad" command="cat $(find symax1_trep)/light_quadmodel.xml" />
+        <node name="light_quad_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+		<remap from="robot_description" to="light_quad" />
+ 	</node>
         <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
         <node pkg="joy" type="joy_node" name="joy_node"/>
         <node name="rviz" pkg="rviz" type="rviz" />

@@ -149,7 +149,7 @@ def QuadMain():
             print A
 
         Xcon = [0,axis[1],axis[0],0,0,0,0,0,0,0,0,0]
-        U = np.array([u0[0],0,0,0]-np.dot(Kstab,X-Xref-Xcon))
+        U = np.array([u0[0],0,0,0]-np.dot(Kstab,X-Xref-Xcon)) #+ [rand.gauss(0,0.05) for i in xrange(4)]
 
         # advance simluation one timestep for model prediction
         dsys.set(X,U,0)  
@@ -159,7 +159,7 @@ def QuadMain():
         A = dsys.fdx()
         P = reduce(np.dot,[A,est_cov,A.T])+proc_cov
 
-        Z = X #without measurement, set observation to prediction
+        Z = X + [rand.gauss(0,0.05) for i in xrange(12)] #simulated meas noise
 
         #obtain measurement Z and Kalman gain, K
         y = Z - X
@@ -170,8 +170,6 @@ def QuadMain():
         X = X + np.dot(K,y)
         est_cov = np.dot(np.identity(dsys.nX)-K,P)
         
-        
-
         configs.data = tuple(X)
 
         refmark.header.frame_id = "/world"
@@ -186,10 +184,13 @@ def QuadMain():
         refmark.color.b = 0.0;
         refmark.color.a = 1.0;
         refmark.pose.position.y = axis[1]
-        refmark.pose.position.x = axis[0]
+        refmark.pose.position.x = axis[0]+2
 
         # send transform data to rviz
-        broadcaster.sendTransform((X[2],X[1],X[0]+3),tf.transformations.quaternion_from_euler(X[3], X[4], X[5]),rospy.Time.now(),"quad","world")
+        broadcaster.sendTransform((X[2]+2,X[1],X[0]+3),tf.transformations.quaternion_from_euler(X[3], X[4], X[5]),rospy.Time.now(),"quad","world")
+
+        # send transform data to rviz
+        broadcaster.sendTransform((Z[2]-2,Z[1],Z[0]+3),tf.transformations.quaternion_from_euler(Z[3], Z[4], Z[5]),rospy.Time.now(),"light_quad","world")
         
         pub.publish(configs)
         markerpub.publish(refmark)
