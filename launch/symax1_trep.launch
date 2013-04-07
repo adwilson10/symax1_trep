@@ -1,0 +1,7 @@
+<launch>
+        <param name="robot_description" command="cat $(find symax1_trep)/quadmodel.xml" />
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+        <node pkg="joy" type="joy_node" name="joy_node"/>
+        <node name="rviz" pkg="rviz" type="rviz" />
+        <node name="state_publisher" pkg="symax1_trep" type="symax1_trep.py" output="screen"/>
+</launch>
