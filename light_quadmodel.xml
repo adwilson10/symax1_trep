@@ -1,0 +1,118 @@
+<robot name="light_quad">
+
+<link name="light_quad">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0.785" />
+    <geometry>
+      <box size="0.4 0.4 0.11" />
+    </geometry>
+    <material name="green">
+      <color rgba="0 .2 0 0.5" />
+    </material>
+  </visual>
+</link>
+
+<link name="light_link1">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="2.2 .1 .1" />
+    </geometry>
+    <material name="blue">
+      <color rgba="0 0 .4 0.5" />
+    </material>
+  </visual>
+</link>
+
+<link name="light_link2">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="0.1 2.2 .1" />
+    </geometry>
+    <material name="blue" />
+  </visual>
+</link>
+
+<link name="light_mot1">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <cylinder radius="0.1" length="0.2" />
+    </geometry>
+    <material name="purple">
+      <color rgba=".3 0 .3 0.5" />
+    </material>
+  </visual>
+</link>
+
+<link name="light_mot2">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <cylinder radius="0.1" length="0.2" />
+    </geometry>
+    <material name="purple"/>
+  </visual>
+</link>
+
+<link name="light_mot3">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <cylinder radius="0.1" length="0.2" />
+    </geometry>
+    <material name="purple"/>
+  </visual>
+</link>
+
+<link name="light_mot4">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <cylinder radius="0.1" length="0.2" />
+    </geometry>
+    <material name="purple"/>
+  </visual>
+</link>
+
+
+<joint name="light_joint1" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="light_quad" />    
+    <child link="light_link1" /> 
+</joint>
+
+<joint name="light_joint2" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="light_quad" />    
+    <child link="light_link2" /> 
+</joint>
+
+<joint name="light_joint3" type="fixed">
+    <origin xyz="1.1 0 0.05" rpy="0 0 0" />
+    <parent link="light_quad" />    
+    <child link="light_mot1" /> 
+</joint>
+
+<joint name="light_joint4" type="fixed">
+    <origin xyz="-1.1 0 0.05" rpy="0 0 0" />
+    <parent link="light_quad" />    
+    <child link="light_mot2" /> 
+</joint>
+
+<joint name="light_joint5" type="fixed">
+    <origin xyz="0 1.1 0.05" rpy="0 0 0" />
+    <parent link="light_quad" />    
+    <child link="light_mot3" /> 
+</joint>
+
+<joint name="light_joint6" type="fixed">
+    <origin xyz="0 -1.1 0.05" rpy="0 0 0" />
+    <parent link="light_quad" />    
+    <child link="light_mot4" /> 
+</joint>
+
+
+
+</robot>
